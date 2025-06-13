@@ -8,7 +8,7 @@ import Loader from '../Loader/Loader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import ReactPaginate from 'react-paginate';
 import { fetchMovies } from '../../services/movieService';
-import type { Movie, MovieApiResponse } from '../../types/movie';
+import type { Movie } from '../../types/movie';
 import styles from './App.module.css';
 
 export default function App() {
@@ -17,13 +17,23 @@ export default function App() {
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
   const { data, isPending, isError, isSuccess } = useQuery<
-    MovieApiResponse,
+    {
+      page: number;
+  results: Movie[];
+  total_results: number;
+  total_pages: number;
+    },
     Error
   >({
     queryKey: ['movies', query, page],
     queryFn: () => fetchMovies(query, page),
     enabled: !!query.trim(),
-    placeholderData: (prev: MovieApiResponse | undefined) => prev,
+    placeholderData: (prev: {
+      page: number;
+  results: Movie[];
+  total_results: number;
+  total_pages: number;
+    } | undefined) => prev,
   });
 
   useEffect(() => {
