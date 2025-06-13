@@ -1,8 +1,15 @@
 import axios from 'axios';
-import type { MovieApiResponse } from '../types/movie';
+import type { Movie } from '../types/movie';
 
 const BASE_URL = 'https://api.themoviedb.org/3/search/movie';
 const TOKEN = import.meta.env.VITE_API_KEY;
+
+interface MovieApiResponse {
+  page: number;
+  results: Movie[];
+  total_results: number;
+  total_pages: number;
+}
 
 export const fetchMovies = async (
   query: string,

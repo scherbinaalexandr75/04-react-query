@@ -8,9 +8,4 @@ export interface Movie {
   release_date: string;
 }
 
-export interface MovieApiResponse {
-  page: number;
-  results: Movie[];
-  total_results: number;
-  total_pages: number;
-}
+
