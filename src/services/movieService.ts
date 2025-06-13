@@ -16,7 +16,6 @@ export const fetchMovies = async (
   page: number
 ): Promise<MovieApiResponse> => {
   try {
-    console.log('TMDB Token:', TOKEN);
     const response = await axios.get<MovieApiResponse>(BASE_URL, {
       params: { query, page },
       headers: {
